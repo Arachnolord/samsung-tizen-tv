@@ -4,6 +4,16 @@ Anpassungen für den Samsung **QE55Q70CATXZT** (Q70C, Tizen 9.0, IP 192.168.1.75
 Stand 07.11.2026. Alle TV-Schritte laufen über den Entwicklermodus (am TV aktiv)
 und einen Docker-Container auf dem NAS 192.168.1.23.
 
+## Screenshots
+
+*Browser-Aufnahmen des Startbildschirms (CleanFrame) – Hintergründe sind freie Fotos/Grafiken, keine privaten Inhalte.*
+
+![CleanFrame – Startbildschirm mit App-Leiste](Screenshots/cf-de.png)
+
+| Weltraum-Hintergrund | Animierter Hintergrund |
+|---|---|
+| ![Weltraum](Screenshots/cf-pillars.png) | ![Animiert](Screenshots/cf-anim.png) |
+
 ## Home-Umstellung/  — CleanFrame als Startbildschirm
 Macht Home-Taste, Standby-An und Kaltstart zu CleanFrame. Jederzeit umkehrbar.
 - Umstellen:   `python3 "Home-Umstellung/cf-home.py" apply`
