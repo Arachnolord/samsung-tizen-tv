@@ -1,0 +1,252 @@
+[
+  {
+    "id": "misty",
+    "name": "Misty coast",
+    "src": "assets/wallpapers/misty.jpg",
+    "thumb": "assets/wallpapers/misty-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "light",
+    "credit": "Ganapathy Kumar",
+    "source": "https://unsplash.com/photos/n4VMQZIkgDg"
+  },
+  {
+    "id": "cove",
+    "name": "Quiet cove",
+    "src": "assets/wallpapers/cove.jpg",
+    "thumb": "assets/wallpapers/cove-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "light",
+    "credit": "Joshua Wordel",
+    "source": "https://unsplash.com/photos/1L_5PT7EKzU"
+  },
+  {
+    "id": "forest",
+    "name": "Forest mist",
+    "src": "assets/wallpapers/forest.jpg",
+    "thumb": "assets/wallpapers/forest-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "Dejan Zakic",
+    "source": "https://unsplash.com/photos/rr2EF3J5F2Y"
+  },
+  {
+    "id": "valley",
+    "name": "Mountain valley",
+    "src": "assets/wallpapers/valley.jpg",
+    "thumb": "assets/wallpapers/valley-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "Aniket Deole",
+    "source": "https://unsplash.com/photos/M6XC789HLe8"
+  },
+  {
+    "id": "night",
+    "name": "Desert stars",
+    "src": "assets/wallpapers/night.jpg",
+    "thumb": "assets/wallpapers/night-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "light",
+    "credit": "Mohammad Alizade",
+    "source": "https://unsplash.com/photos/4wzRuAb-KWs"
+  },
+  {
+    "id": "peaks",
+    "name": "Blue peaks",
+    "src": "assets/wallpapers/peaks.jpg",
+    "thumb": "assets/wallpapers/peaks-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "John Rodenn Castillo",
+    "source": "https://unsplash.com/photos/rQqWOHZ96OM"
+  },
+  {
+    "id": "ridge",
+    "name": "Sunlit ridges",
+    "src": "assets/wallpapers/ridge.jpg",
+    "thumb": "assets/wallpapers/ridge-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "Cristina Gottardi",
+    "source": "https://unsplash.com/photos/wndpWTiDuT0"
+  },
+  {
+    "id": "golden",
+    "name": "Golden hour",
+    "src": "assets/wallpapers/golden.jpg",
+    "thumb": "assets/wallpapers/golden-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "Karthik Sreenivas",
+    "source": "https://unsplash.com/photos/tmtkhWbgMu8"
+  },
+  {
+    "id": "summit",
+    "name": "Sunlit summits",
+    "src": "assets/wallpapers/summit.jpg",
+    "thumb": "assets/wallpapers/summit-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "Rudra Gupta",
+    "source": "https://unsplash.com/photos/PuTSzJJ-qyU"
+  },
+  {
+    "id": "amber",
+    "name": "Amber hills",
+    "src": "assets/wallpapers/amber.jpg",
+    "thumb": "assets/wallpapers/amber-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "light",
+    "credit": "Chris Barbalis",
+    "source": "https://unsplash.com/photos/vazZtmYFgFY"
+  },
+  {
+    "id": "mint",
+    "name": "Mint wave",
+    "src": "assets/wallpapers/mint.jpg",
+    "thumb": "assets/wallpapers/mint-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "light",
+    "credit": "MagicPattern",
+    "source": "https://unsplash.com/photos/87PP9Zd7MNo"
+  },
+  {
+    "id": "alpine",
+    "name": "Alpine glow",
+    "src": "assets/wallpapers/alpine.jpg",
+    "thumb": "assets/wallpapers/alpine-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "light",
+    "credit": "Cristina Gottardi",
+    "source": "https://unsplash.com/photos/CSpjU6hYo_0"
+  },
+  {
+    "id": "nebula",
+    "name": "Carina nebula",
+    "src": "assets/wallpapers/nebula.jpg",
+    "thumb": "assets/wallpapers/nebula-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "NASA/ESA/Hubble",
+    "source": "https://images.nasa.gov"
+  },
+  {
+    "id": "pillars",
+    "name": "Star nursery",
+    "src": "assets/wallpapers/pillars.jpg",
+    "thumb": "assets/wallpapers/pillars-thumb.jpg",
+    "pos": "50% 45%",
+    "tone": "dark",
+    "credit": "NASA/ESA/CSA/STScI",
+    "source": "https://images.nasa.gov/details/PIA25433"
+  },
+  {
+    "id": "earth",
+    "name": "Blue marble",
+    "src": "assets/wallpapers/earth.jpg",
+    "thumb": "assets/wallpapers/earth-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "NASA",
+    "source": "https://images.nasa.gov"
+  },
+  {
+    "id": "reef",
+    "name": "Coral reef",
+    "src": "assets/wallpapers/reef.jpg",
+    "thumb": "assets/wallpapers/reef-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "Wikimedia Commons (CC)",
+    "source": "https://commons.wikimedia.org"
+  },
+  {
+    "id": "spirit-violet",
+    "name": "Violet spirit",
+    "src": "assets/wallpapers/spirit-violet.jpg",
+    "thumb": "assets/wallpapers/spirit-violet-thumb.jpg",
+    "pos": "50% 45%",
+    "tone": "dark",
+    "credit": "CleanFrame (original)",
+    "source": ""
+  },
+  {
+    "id": "spirit-green",
+    "name": "Green spirit",
+    "src": "assets/wallpapers/spirit-green.jpg",
+    "thumb": "assets/wallpapers/spirit-green-thumb.jpg",
+    "pos": "50% 45%",
+    "tone": "dark",
+    "credit": "CleanFrame (original)",
+    "source": ""
+  },
+  {
+    "id": "blackhole",
+    "name": "Black hole",
+    "src": "assets/wallpapers/blackhole.jpg",
+    "thumb": "assets/wallpapers/blackhole-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "NASA/ESA/Hubble (D. Coe/G. Bacon)",
+    "source": "https://images.nasa.gov/details/GSFC_20171208_Archive_e000386"
+  },
+  {
+    "id": "accretion",
+    "name": "Black hole jet",
+    "src": "assets/wallpapers/accretion.jpg",
+    "thumb": "assets/wallpapers/accretion-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "NASA/JPL-Caltech",
+    "source": "https://images.nasa.gov/details/PIA22085"
+  },
+  {
+    "id": "scifi",
+    "name": "Alien world",
+    "src": "assets/wallpapers/scifi.jpg",
+    "thumb": "assets/wallpapers/scifi-thumb.jpg",
+    "pos": "50% 55%",
+    "tone": "dark",
+    "credit": "NASA/JPL-Caltech",
+    "source": "https://images.nasa.gov/details/PIA21423"
+  },
+  {
+    "id": "anim-aurora",
+    "name": "Aurora",
+    "src": "assets/wallpapers/anim-aurora.jpg",
+    "thumb": "assets/wallpapers/anim-aurora-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "CleanFrame (animated)",
+    "source": ""
+  },
+  {
+    "id": "anim-warp",
+    "name": "Starflight",
+    "src": "assets/wallpapers/anim-warp.jpg",
+    "thumb": "assets/wallpapers/anim-warp-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "CleanFrame (animated)",
+    "source": ""
+  },
+  {
+    "id": "anim-flow",
+    "name": "Nebula flow",
+    "src": "assets/wallpapers/anim-flow.jpg",
+    "thumb": "assets/wallpapers/anim-flow-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "CleanFrame (animated)",
+    "source": ""
+  },
+  {
+    "id": "anim-cosmos",
+    "name": "Shooting stars",
+    "src": "assets/wallpapers/anim-cosmos.jpg",
+    "thumb": "assets/wallpapers/anim-cosmos-thumb.jpg",
+    "pos": "50% 50%",
+    "tone": "dark",
+    "credit": "CleanFrame (animated)",
+    "source": ""
+  }
+]

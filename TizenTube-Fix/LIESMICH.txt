@@ -1,0 +1,28 @@
+TizenTube Cobalt 2.1.1 – FAH-Patch SponsorBlock (07.11.2026)
+
+Fehler: TizenTube 1.15.x liest die Video-ID aus dem Hash per
+  .search.replace("?v=","").split("&")[0]
+Startet die App über Dock/REST/DIAL, lautet der Hash #/watch?&launch=dial&v=<ID>.
+Die ID wird dann "?" und bleibt es: SponsorBlock fragt einmal für "?" nach
+und danach nie wieder (upstream reisxd/TizenTube #730, offen).
+
+Patch (patch2.py, wirkt auf service/dist/index.js im .wgt):
+- Der Dienst liefert das TizenTube-Skript selbst unter
+  https://www.youtube.com/__tt/userScript.js aus. Er holt es von jsdelivr,
+  ersetzt den Ausdruck durch eine Regex auf v= und hält es 30 min vor.
+- Fehlt das Muster, weil upstream repariert hat, geht das Skript unverändert
+  durch. Ist jsdelivr nicht erreichbar, leitet er auf das Original um.
+- Mit diag.js als 2. Argument: Protokoll unter http://192.168.1.75:8101/__ttlog
+  (nur zur Fehlersuche, legt den Verlauf im LAN offen, nicht dauerhaft nutzen).
+
+Bauen:
+  Original-wgt entpacken (Moonlight/TizenTubeCobalt.wgt), signature1.xml und
+  author-signature.xml löschen,
+  python3 patch2.py <ordner>/service/dist/index.js [diag.js]
+  im Ordner: zip -r -X ../TizenTube-fix.wgt .
+Installieren: wie TizenTube, Container moonlight-installer am NAS
+  (Volume moonlight-config), wgt nach /tmp/TizenTube.wgt, node /tmp/tt-install.js.
+Rückweg: Original Moonlight/TizenTubeCobalt.wgt genauso installieren.
+
+Geprüft 07.11.: „Alle hacken ihre Fernseher“ (ikt68vqJ2qA), Abschnitt
+0:25–0:31 automatisch übersprungen.

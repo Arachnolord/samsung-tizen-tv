@@ -1,0 +1,23 @@
+Tessel 1.35.0 – Medienplayer für Tizen (08.11.2026)
+
+Quelle: github.com/PatrickSt1991/tessel-tizen-tv (MIT, früher "VLC TV").
+Spielt SMB/DLNA/WebDAV/USB direkt über den Hardware-Decoder des TV (AVPlay):
+H.264/HEVC/VP9, AAC/MP3/AC3/EAC3, Untertitel SRT/ASS/eingebettet.
+Nicht: DTS/TrueHD (nur über den Begleit-Server), Dolby Vision (Samsung kann es nicht).
+
+App-ID am TV: madebypatk.vlcweb (Paket madebypatk)
+Starten:  curl -X POST http://192.168.1.75:8001/api/v2/applications/madebypatk.vlcweb
+
+tessel-1.35.0.wgt  = Original-Release, SHA256
+  2d3f5191c9fc248ee0b99ac37f0cf2cda973bbab71b51db640b33909389771b1
+  (Download über die API, der normale Release-Link lieferte 504:
+   curl -L -H 'Accept: application/octet-stream'
+   https://api.github.com/repositories/1230908370/releases/assets/<id>)
+
+Installieren/Update (wie TizenTube):
+  NAS: docker run -d --name moonlight-installer -v moonlight-config:/root/share
+       ghcr.io/smookeydev/moonlighttizeninstaller:latest
+  wgt  -> docker exec -i moonlight-installer sh -c "cat > /tmp/tessel.wgt"
+  Skript -> docker exec -i moonlight-installer sh -c "cat > /tmp/tessel-install.js"
+  docker exec moonlight-installer node /tmp/tessel-install.js
+  danach Container + Image wieder löschen, Volume moonlight-config behalten.

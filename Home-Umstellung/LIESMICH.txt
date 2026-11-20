@@ -1,0 +1,30 @@
+CleanFrame als Startbildschirm auf dem Samsung TV (QE55Q70CATXZT, 192.168.1.75)
+
+Umstellen:   python3 ~/claude/cleanframe-tv/cf-home.py apply
+Zuruecksetzen auf Samsung:  python3 ~/claude/cleanframe-tv/cf-home.py restore
+Zustand lesen:  python3 ~/claude/cleanframe-tv/cf-home.py query
+(immer per  !  in Claude Code starten, oder direkt im Terminal)
+
+Originalzustand (Rueckweg-Sicherung) steht in cfbuild/original.json:
+  home_appid / startup_appid / booting_appid_backup / first_screen = com.samsung.tv.csfs
+  auto_start = 1
+
+Voraussetzung: NAS 192.168.1.23 (Docker) erreichbar, Entwicklermodus am TV an.
+Stand 07.11.2026: Home + Standby + Kaltstart -> CleanFrame (Kaltstart ~60s).
+
+Final 09.11.: apply setzt home_appid + startup_appid + booting_appid_backup +
+first_screen/type auf CleanFrame. Am 09.11. getestet (fs-on): Home braucht nur EINEN
+Druck UND ein Absturz/Beenden einer App faellt auf CleanFrame zurueck (nicht mehr ins
+Samsung-Menue). Der fruehere Doppel-Home kam NICHT allein von first_screen, sondern
+von der damaligen Kombination ohne gesetzte Home-Operation.
+(Historie 07.11.: apply liess first_screen auf Samsung -> Absturz fiel auf Samsung.)
+
+Test 09.11. (Weg 1 - Absturz-Rueckfall auf CleanFrame):
+Echter Pfad jetzt:  ~/claude/Samsung Tizen TV/Home-Umstellung/cf-home.py
+  python3 cf-home.py fs-on    -> NUR first_screen = CleanFrame (Rest bleibt wie bei apply).
+                                 Danach pruefen: Home = EIN Druck? App beenden -> CleanFrame?
+  python3 cf-home.py fs-off   -> first_screen zurueck auf Samsung, Home/Start bleiben
+                                 CleanFrame (= Stand nach apply). Nimmt NUR den Test zurueck.
+fs-on/fs-off fassen ausschliesslich db/first_screen/type an, nutzen original.json nur zum
+Zuruecksetzen. restore bleibt der grosse Notausgang (alles zurueck auf Samsung).
+Kommt der Doppel-Home mit fs-on zurueck -> fs-off, dann Weg 2 (Waechter-Dienst).

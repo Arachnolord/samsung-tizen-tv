@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset=utf8><style>html,body{margin:0}</style></head>
+<body><canvas id=c width=512 height=512></canvas><script>
+var x=document.getElementById('c').getContext('2d'),W=512;
+// Hintergrund-Kachel
+var g=x.createLinearGradient(0,0,W,W);g.addColorStop(0,'#223150');g.addColorStop(1,'#0a0f1c');
+x.fillStyle=g;x.beginPath();x.roundRect(0,0,W,W,112);x.fill();
+// dezenter Schimmer
+function glow(cx,cy,r,col,a){var rg=x.createRadialGradient(cx,cy,0,cx,cy,r);rg.addColorStop(0,col+a);rg.addColorStop(1,col+'00');x.fillStyle=rg;x.fillRect(0,0,W,W);}
+x.save();x.beginPath();x.roundRect(0,0,W,W,112);x.clip();
+glow(150,140,320,'#39e0a0','3a');glow(400,430,340,'#4d84ff','30');
+// Sterne
+x.fillStyle='rgba(255,255,255,0.55)';
+var S=[[120,90,1.6],[420,120,1.3],[360,70,1],[90,360,1.2],[440,330,1.5],[300,420,1]];
+for(var i=0;i<S.length;i++){x.beginPath();x.arc(S[i][0],S[i][1],S[i][2]*2,0,7);x.fill();}
+x.restore();
+// Rahmen-Ring
+x.strokeStyle='#ffffff';x.lineWidth=30;x.lineJoin='round';
+x.beginPath();x.roundRect(132,128,248,200,44);x.stroke();
+// Dock-Pille im Rahmen unten
+x.fillStyle='#ffffff';
+x.beginPath();x.roundRect(176,360,160,40,20);x.fill();
+document.title='ok';
+</script></body></html>

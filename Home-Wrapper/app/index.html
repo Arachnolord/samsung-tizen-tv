@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>CleanFrame Key</title>
+  <style>html, body { margin:0; width:100%; height:100%; background:#0a1321; }</style>
+</head>
+<body>
+<script>
+/* Home-Tasten-Wrapper. Der TV startet die Home-App ueber einen Sonderpfad
+   (__NO_RAISE_WINDOW), der einen direkt registrierten Launcher hinter dem
+   Ladescreen stecken laesst. Darum zeigt home_appid HIERHER: diese App startet
+   CleanFrame normal (mit Vordergrund).
+   WICHTIG: Beenden erst, wenn CleanFrame wirklich vorne ist (dann werden WIR
+   unsichtbar). Ein Beenden nach fester Zeit wuerde beim Kaltstart (CleanFrame
+   ~0,7 s) zu frueh kommen -> System faellt auf home_appid (= uns) zurueck ->
+   Endlosschleife. */
+(function () {
+  'use strict';
+  var LAUNCHER = 'nClrkHome1.FrameHome', done = false;
+  function stop() {
+    if (done) return; done = true;
+    try { tizen.application.getCurrentApplication().exit(); } catch (e) {}
+  }
+  function go(retry) {
+    try {
+      tizen.application.launch(LAUNCHER, function () {}, function () {
+        if (retry < 4) setTimeout(function () { go(retry + 1); }, 300);
+      });
+    } catch (e) { if (retry < 4) setTimeout(function () { go(retry + 1); }, 300); }
+  }
+  /* Sobald CleanFrame im Vordergrund ist, sind wir versteckt -> sauber beenden. */
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); });
+  window.addEventListener('pagehide', stop);
+  window.addEventListener('load', function () { setTimeout(function () { go(0); }, 0); });
+  setTimeout(stop, 6000); /* harter Fallback, nur falls das Verstecken nie gemeldet wird */
+})();
+</script>
+</body>
+</html>

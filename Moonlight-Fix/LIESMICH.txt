@@ -1,0 +1,31 @@
+Moonlight-tizen 1.20.0 – FAH-Patch Esc-Taste (08.11.2026)
+
+Fehler: Mit Bluetooth-Tastatur am TV kam Esc im Spiel nicht an (kein Menü, kein Ausstieg).
+Gemessen am TV (Mitschnitt aller Sondertasten):
+  Esc        -> keydown XF86Back / code Escape / keyCode 10009, keyup 2-6 ms später,
+                egal wie lange gehalten (Samsung-Doku Keyboard/IME, Tabelle 5: ESC = Back)
+  Backspace  -> keyCode 8, echte Haltezeit 100-300 ms (kommt normal an)
+Moonlight schickte Esc als Druck+Loslassen im selben Moment (sendEscapeKeyToHost) und nur, wenn
+das Stream-Element den Fokus hatte. Unreal-Spiele (StarRupture) verpassen so einen Druck.
+Der native Weg hätte 10009 & 0xFF = VK 0x19 (Kanji) gesendet.
+
+Patch (patch_tasten.py, wirkt auf platform/index.js im .wgt):
+- Esc wird in der Capture-Phase am window abgefangen (Fokus egal), 150 ms gehalten gesendet,
+  das native Kanji-Ereignis unterdrückt. Zurück-Taste der Fernbedienung = ebenfalls Esc.
+- Mit 2. Argument (URL) meldet der Build Sondertasten zur Fehlersuche (Moonlight-fix-diag.wgt,
+  NICHT dauerhaft nutzen). Empfänger war ein node:22-alpine-Container auf der NAS, Port 8799.
+
+Dateien:
+  Moonlight-1.20.0-original.wgt  Original aus ghcr.io/brightcraft/moonlight-tizen:master
+  Moonlight-fix.wgt              gepatcht, ohne Diagnose (Endfassung)
+  ml-install.js                  signieren + installieren im NAS-Container
+
+Bauen:
+  Original entpacken, signature1.xml + author-signature.xml löschen,
+  python3 patch_tasten.py <ordner>/platform/index.js
+  im Ordner: zip -r -X ../Moonlight-fix.wgt .
+Installieren: wie Tessel (../Tessel/LIESMICH.txt), wgt nach /tmp/moonlight.wgt, node /tmp/ml-install.js.
+  Kopplung mit Apollo bleibt erhalten (gleiches Zertifikat).
+Rückweg: Moonlight-1.20.0-original.wgt genauso installieren.
+
+Geprüft 08.11.: Esc öffnet in StarRupture das Menü (Betreiber).

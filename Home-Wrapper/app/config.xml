@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="https://local.frame-home/key" version="1.0.0" viewmodes="maximized">
+  <!-- Winziger Home-Tasten-Wrapper. Der TV startet die Home-App ueber __NO_RAISE_WINDOW,
+       wodurch ein direkt registrierter Launcher hinter dem Ladescreen haengenbleibt.
+       Deshalb zeigt db/appfw/home_appid HIERHER: diese App startet CleanFrame normal
+       (mit Vordergrund) und beendet sich sofort (~0,2 s). -->
+  <tizen:application id="cfkeyHome1.key" package="cfkeyHome1" required_version="5.0"/>
+  <content src="index.html"/>
+  <name>CleanFrame Key</name>
+  <tizen:profile name="tv-samsung"/>
+  <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+</widget>
