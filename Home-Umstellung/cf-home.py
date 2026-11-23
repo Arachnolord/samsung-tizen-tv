@@ -9,7 +9,10 @@ MODE = sys.argv[1] if len(sys.argv) > 1 else "query"
 if MODE not in ("query", "apply", "restore", "fs-on", "fs-off", "wrapper", "wrapper-off"):
     sys.exit("Erlaubt: query | apply | restore | fs-on | fs-off | wrapper | wrapper-off")
 
-TV = "192.168.1.75"
+TV = os.environ.get("TV_IP") or "192.168.1.75"
+# CF_DOCKER=local  -> Docker-Befehle direkt auf diesem Rechner (fuer setup.sh, portabel).
+# sonst  -> wie bisher ueber SSH auf den Docker-Host (NAS).
+CF_LOCAL = os.environ.get("CF_DOCKER", "").lower() == "local"
 HERE = os.path.dirname(os.path.abspath(__file__))
 CS = HERE + "/cfbuild/Control.cs"
 PROJ = HERE + "/cfbuild/Control.csproj"
@@ -19,6 +22,10 @@ NAS = ["/usr/bin/ssh", "-o", "ConnectTimeout=5", "-o", "BatchMode=yes",
 SD = "/home/owner/share/tmp/sdk_tools"
 
 def ssh(cmd, stdin=None):
+    # Lokaler Modus: Docker laeuft auf diesem Rechner, kein SSH noetig.
+    if CF_LOCAL:
+        return subprocess.run(["bash", "-c", cmd], input=stdin, text=True,
+                              capture_output=True, timeout=240)
     return subprocess.run(NAS + [cmd], input=stdin, text=True,
                           capture_output=True, timeout=240)
 

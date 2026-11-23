@@ -9,7 +9,7 @@ const { readConfig } = require(B + 'utils/configuration.js');
 const { resignPackage } = require(B + 'utils/SamsungCertificateCreation.js');
 const { parsePackage, installPackage } = require(B + 'utils/PackageInstallation.js');
 const PushFile = require(B + 'utils/FilePusher.js');
-const TV = '192.168.1.75';
+const TV = process.env.TV_IP || '192.168.1.75';
 (async () => {
   const cfg = readConfig();
   if (!cfg.authorCert || !cfg.distributorCert) throw new Error('kein Zertifikat im Volume');

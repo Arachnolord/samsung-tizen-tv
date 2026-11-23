@@ -16,6 +16,18 @@ Rechner im selben Netz liegen kann (bei der Entwicklung war das ein NAS).
 
 ---
 
+## So sieht es aus
+
+*Browser-Aufnahmen des Startbildschirms (CleanFrame) – die Hintergründe sind freie Fotos/Grafiken, keine privaten Inhalte.*
+
+![CleanFrame – Startbildschirm mit App-Leiste](Screenshots/cf-de.png)
+
+| Weltraum-Hintergrund | Animierter Hintergrund |
+|---|---|
+| ![Weltraum](Screenshots/cf-pillars.png) | ![Animiert](Screenshots/cf-anim.png) |
+
+---
+
 ## ⚠️ Bitte zuerst lesen – Risiko
 
 Dies ist die Dokumentation eines Experiments am **eigenen** Gerät, keine Empfehlung,
@@ -47,6 +59,40 @@ App-Identität**. Übernimm keine fremden Zertifikate oder App-IDs.
 
 ---
 
+## Schnellstart (geführt)
+
+Für den geführten Weg gibt es ein Skript, das nach einer kurzen Fragerunde
+(„Fernseher an?", „welche IP?") die gewählten Apps selbst baut, signiert und
+installiert.
+
+```sh
+# im entpackten Projektordner:
+./setup.sh
+```
+
+- **macOS / Linux:** direkt `./setup.sh` (ggf. vorher `chmod +x setup.sh`).
+- **Windows:** `setup.cmd` doppelklicken oder aufrufen – es startet `setup.sh`
+  über Git-Bash oder WSL.
+
+Das Skript prüft Docker, fragt die TV-IP ab, erkennt die eigene Rechner-IP,
+verbindet sich per sdb und bietet ein Auswahlmenü der Bausteine.
+
+**Beim ersten Lauf** ist noch kein Samsung-Zertifikat da. Das Skript öffnet dann
+die Web-Oberfläche des Installers im Browser; dort meldest du dich **einmalig mit
+deinem Samsung-Konto an** (oder legst eines an), der Installer liest die Geräte-ID
+deines Fernsehers aus und erzeugt das Zertifikat. Danach läuft der Rest von selbst.
+
+Der verwendete Container ist ein **Wegwerf-Container** und wird am Ende nach
+Rückfrage entfernt. Der **Projektstand (das Zertifikat)** bleibt erhalten – im
+Docker-Volume und zusätzlich lokal in `setup-data/` (beides nicht im Git). Beim
+nächsten Lauf wird er automatisch wiederverwendet; ein erneutes Samsung-Login ist
+dann nicht nötig.
+
+Voraussetzung bleibt: **Docker läuft** und am TV ist der **Entwicklermodus** an
+(siehe unten). Wer die Schritte lieber von Hand macht, folgt dem ausführlichen Weg.
+
+---
+
 ## Voraussetzungen
 
 - Ein **Samsung-TV mit Tizen 5.0 oder neuer**. Die Home-Umstellung gelingt nur auf
@@ -54,8 +100,10 @@ App-Identität**. Übernimm keine fremden Zertifikate oder App-IDs.
 - Der **Entwicklermodus** des Fernsehers ist eingeschaltet (Schritt 1).
 - Ein **Rechner mit Docker** im selben lokalen Netz wie der Fernseher
   (im Beispiel ein NAS). TV und Rechner müssen sich gegenseitig erreichen.
-- Ein **Samsung-Signierzertifikat** in einem Docker-Volume `moonlight-config`
-  (Schritt 2). Es wird einmalig angelegt und danach wiederverwendet.
+- Ein **Samsung-Signierzertifikat**. Das legt der Installer einmalig über seine
+  Web-Oberfläche an (Samsung-Konto-Login + Geräte-ID des Fernsehers). `setup.sh`
+  macht das automatisch; es wird im Docker-Volume `moonlight-config` gespeichert
+  und wiederverwendet (Schritt 2).
 - Grundlagen: Terminal/SSH auf dem Docker-Host, Umgang mit `docker`-Befehlen.
 
 ### Platzhalter in dieser Anleitung
@@ -90,23 +138,33 @@ Schritte können je nach Modelljahr abweichen.
 
 ## Schritt 2 – Installer-Container und Zertifikat
 
-Signieren und Installieren übernimmt der Moonlight-Tizen-Installer (SmookeyDev) in
-einem Container. Das Samsung-Zertifikat liegt in einem **dauerhaften Volume**
-`moonlight-config` und wird **einmalig** angelegt.
+Signieren und Installieren übernimmt der Moonlight-Tizen-Installer (ein
+dockerisierter TizenBrew-Installer) in einem Container. Das Samsung-Zertifikat
+liegt in einem **dauerhaften Volume** `moonlight-config` (im Container unter
+`/root/share`) und wird **einmalig** angelegt.
+
+Für die **Zertifikatserstellung** braucht der Container die Web-Oberfläche. Starte
+ihn dafür mit veröffentlichten Ports (`8091` = Oberfläche, `4794` = Rückkanal des
+Samsung-Logins):
 
 ```sh
 # Auf dem Docker-Host:
 docker run -d --name moonlight-installer \
+  -p 8091:8091 -p 4794:4794 \
   -v moonlight-config:/root/share \
   ghcr.io/smookeydev/moonlighttizeninstaller:latest
 ```
 
-Beim ersten Einrichten legst du über den Installer ein **Samsung-Zertifikat** an
-(dazu sind ein Samsung-Konto und die **DUID** deines Fernsehers nötig). Es wird im
-Volume `moonlight-config` gespeichert. Alle Skripte dieses Repos lesen das
-Zertifikat von dort – ist es einmal vorhanden, brauchst du es nicht erneut
-anzulegen. Lass das Volume bestehen; den Container selbst kannst du nach getaner
-Arbeit löschen.
+Dann im Browser **http://localhost:8091/ui/dist/index.html** öffnen, mit dem
+**Samsung-Konto anmelden** (oder eines anlegen) und den Schritten folgen. Der
+Fernseher muss dabei verbunden sein – der Installer liest seine **Geräte-ID (DUID)**
+aus und erzeugt daraus Author- und Distributor-Zertifikat. Beides landet als
+`tizenbrewInstallerConfig.json` im Volume `moonlight-config`.
+
+Ist das Zertifikat vorhanden, brauchst du die Ports nicht mehr; alle Installations-
+skripte lesen es aus dem Volume. Lass das Volume bestehen; den Container selbst
+kannst du jederzeit löschen. (`setup.sh` erledigt all das automatisch und sichert
+den Projektstand zusätzlich lokal in `setup-data/`.)
 
 > Halte Zertifikate, Passwörter und Konto-Daten in privatem, lokalem Speicher.
 > Melde dich bei Samsung selbst an – kein Skript braucht deine Zugangsdaten.
