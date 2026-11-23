@@ -12,7 +12,7 @@ Patch (patch2.py, wirkt auf service/dist/index.js im .wgt):
   ersetzt den Ausdruck durch eine Regex auf v= und hält es 30 min vor.
 - Fehlt das Muster, weil upstream repariert hat, geht das Skript unverändert
   durch. Ist jsdelivr nicht erreichbar, leitet er auf das Original um.
-- Mit diag.js als 2. Argument: Protokoll unter http://192.168.1.75:8101/__ttlog
+- Mit diag.js als 2. Argument: Protokoll unter http://<TV-IP>:8101/__ttlog
   (nur zur Fehlersuche, legt den Verlauf im LAN offen, nicht dauerhaft nutzen).
 
 Bauen:

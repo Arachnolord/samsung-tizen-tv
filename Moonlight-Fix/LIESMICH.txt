@@ -13,7 +13,7 @@ Patch (patch_tasten.py, wirkt auf platform/index.js im .wgt):
 - Esc wird in der Capture-Phase am window abgefangen (Fokus egal), 150 ms gehalten gesendet,
   das native Kanji-Ereignis unterdrückt. Zurück-Taste der Fernbedienung = ebenfalls Esc.
 - Mit 2. Argument (URL) meldet der Build Sondertasten zur Fehlersuche (Moonlight-fix-diag.wgt,
-  NICHT dauerhaft nutzen). Empfänger war ein node:22-alpine-Container auf der NAS, Port 8799.
+  NICHT dauerhaft nutzen). Empfänger war ein node:22-alpine-Container auf dem Docker-Host, Port 8799.
 
 Dateien:
   Moonlight-1.20.0-original.wgt  Original aus ghcr.io/brightcraft/moonlight-tizen:master

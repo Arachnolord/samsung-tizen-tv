@@ -1,15 +1,15 @@
-CleanFrame als Startbildschirm auf dem Samsung TV (QE55Q70CATXZT, 192.168.1.75)
+CleanFrame als Startbildschirm auf dem Samsung TV (getestet: QE55Q70CATXZT, Tizen 9.0)
 
-Umstellen:   python3 ~/claude/cleanframe-tv/cf-home.py apply
-Zuruecksetzen auf Samsung:  python3 ~/claude/cleanframe-tv/cf-home.py restore
-Zustand lesen:  python3 ~/claude/cleanframe-tv/cf-home.py query
-(immer per  !  in Claude Code starten, oder direkt im Terminal)
+Umstellen:   python3 Home-Umstellung/cf-home.py apply
+Zuruecksetzen auf Samsung:  python3 Home-Umstellung/cf-home.py restore
+Zustand lesen:  python3 Home-Umstellung/cf-home.py query
+(TV-IP und Docker-Host-Zugang stehen oben in cf-home.py)
 
 Originalzustand (Rueckweg-Sicherung) steht in cfbuild/original.json:
   home_appid / startup_appid / booting_appid_backup / first_screen = com.samsung.tv.csfs
   auto_start = 1
 
-Voraussetzung: NAS 192.168.1.23 (Docker) erreichbar, Entwicklermodus am TV an.
+Voraussetzung: Docker-Host (<HOST-IP>) erreichbar, Entwicklermodus am TV an.
 Stand 07.11.2026: Home + Standby + Kaltstart -> CleanFrame (Kaltstart ~60s).
 
 Final 09.11.: apply setzt home_appid + startup_appid + booting_appid_backup +
@@ -20,7 +20,7 @@ von der damaligen Kombination ohne gesetzte Home-Operation.
 (Historie 07.11.: apply liess first_screen auf Samsung -> Absturz fiel auf Samsung.)
 
 Test 09.11. (Weg 1 - Absturz-Rueckfall auf CleanFrame):
-Echter Pfad jetzt:  ~/claude/Samsung Tizen TV/Home-Umstellung/cf-home.py
+Pfad im Repo:  Home-Umstellung/cf-home.py
   python3 cf-home.py fs-on    -> NUR first_screen = CleanFrame (Rest bleibt wie bei apply).
                                  Danach pruefen: Home = EIN Druck? App beenden -> CleanFrame?
   python3 cf-home.py fs-off   -> first_screen zurueck auf Samsung, Home/Start bleiben
